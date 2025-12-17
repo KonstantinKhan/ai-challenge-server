@@ -6,4 +6,5 @@ import kotlinx.serialization.Serializable
 data class Book(
     val title: String,
     val author: List<String>,
+    val hasScan: Boolean,
 )

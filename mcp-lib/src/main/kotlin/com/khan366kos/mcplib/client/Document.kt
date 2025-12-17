@@ -8,4 +8,6 @@ data class Document(
     @SerialName("author_name")
     val authorName: List<String>,
     val title: String,
+    @SerialName("public_scan_b")
+    val publicScanB: Boolean,
 )

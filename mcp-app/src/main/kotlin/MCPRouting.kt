@@ -51,43 +51,45 @@ fun Application.configureMCPRouting() {
                     description = "Get books at the user's request",
                     inputSchema = Tool.Input(
                         properties = buildJsonObject {
-                            putJsonObject("title") {
-                                put("type", JsonPrimitive("string"))
-                                put("description", JsonPrimitive("Book title to search"))
-                            }
+//                            putJsonObject("title") {
+//                                put("type", JsonPrimitive("string"))
+//                                put("description", JsonPrimitive("Book title to search"))
+//                            }
                             putJsonObject("author") {
-                                put("type", JsonPrimitive("array"))
+                                put("type", JsonPrimitive("string"))
                                 put("description", JsonPrimitive("Author names"))
-                                putJsonObject("items") {
-                                    put("type", JsonPrimitive("string"))
-                                }
+//                                putJsonObject("items") {
+//                                    put("type", JsonPrimitive("string"))
+//                                }
                             }
                         },
-                        required = listOf("title")
+                        required = listOf("author")
                     )
                 ) { request ->
                     try {
-                        val title = request.arguments["title"]?.jsonPrimitive?.content
-                        val authorArray = request.arguments["author"]?.jsonArray
+//                        val title = request.arguments["title"]?.jsonPrimitive?.content
+                        val author = request.arguments["author"]?.jsonPrimitive?.content
 
-                        if (title.isNullOrEmpty()) {
+                        if (author.isNullOrEmpty()) {
                             return@addTool CallToolResult(
-                                content = listOf(TextContent("The 'title' parameter is required and cannot be empty.")),
+                                content = listOf(TextContent("The 'author' parameter is required and cannot be empty.")),
                                 isError = true
                             )
                         }
 
                         val query = buildString {
-                            append(title)
-                            if (!authorArray.isNullOrEmpty()) {
-                                append(" ")
-                                append(authorArray.joinToString(" ") {
-                                    it.jsonPrimitive.content
-                                })
-                            }
+                            append(author)
+//                            if (!authorArray.isNullOrEmpty()) {
+//                                append(" ")
+//                                append(authorArray.joinToString(" ") {
+//                                    it.jsonPrimitive.content
+//                                })
+//                            }
                         }
 
                         val books = libClient.search(query)
+
+                        println(books.filter { it.hasScan })
 
                         if (books.isEmpty()) {
                             CallToolResult(
