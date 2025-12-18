@@ -11,6 +11,11 @@ application {
 dependencies {
     implementation(projects.mcpLib)
 
+    implementation(libs.exposed.core)
+    implementation(libs.exposed.jdbc)
+    implementation(libs.exposed.kotlin.datetime)
+    implementation(libs.sqlite.jdbc)
+
     implementation(libs.ktor.server.content.negotiation)
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.serialization.kotlinx.json)
@@ -21,6 +26,12 @@ dependencies {
     implementation(libs.ktor.server.sse)
     implementation(libs.mcp)
     implementation(libs.logback.classic)
+
+    // Scheduler dependencies
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.kotlinx.datetime)
 
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)

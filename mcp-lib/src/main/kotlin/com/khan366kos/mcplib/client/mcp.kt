@@ -54,8 +54,8 @@ fun runMcpServer() {
         ) { request ->
             try {
                 // Extract and validate parameters
-                val title = request.arguments["title"]?.jsonPrimitive?.content
-                val authorArray = request.arguments["author"]?.jsonArray
+                val title = request.arguments?.get("title")?.jsonPrimitive?.content
+                val authorArray = request.arguments?.get("author")?.jsonArray
 
                 // Validate required parameters
                 if (title.isNullOrEmpty()) {
