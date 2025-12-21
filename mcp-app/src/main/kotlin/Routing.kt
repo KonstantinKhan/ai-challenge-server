@@ -10,6 +10,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sse.*
 import io.ktor.sse.*
+import io.modelcontextprotocol.kotlin.sdk.server.mcp
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
 
